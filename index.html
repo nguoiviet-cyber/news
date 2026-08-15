@@ -1230,7 +1230,7 @@
     </div>
 
     <div class="footer-bottom" id="footer-copy">
-      &copy; 2026 Người Việt Today. All rights reserved.
+      &copy; 2026 Người Việt Today. All rights reserved. Powered by US RSS News Aggregator.
     </div>
   </footer>
 
@@ -1435,14 +1435,37 @@
       renderNewsGrid();
     }
 
+    // TRÍCH XUẤT ẢNH NÂNG CAO - FIX LỖI NPR NATIONAL
     function extractImage(item) {
-      if (item.thumbnail && item.thumbnail.length > 0) return item.thumbnail;
-      if (item.enclosure && item.enclosure.link) return item.enclosure.link;
-      const div = document.createElement('div');
-      div.innerHTML = item.description || item.content || '';
-      const img = div.querySelector('img');
-      if (img && img.src) return img.src;
-      return 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=500&q=80';
+      // 1. Thumbnail có sẵn
+      if (item.thumbnail && typeof item.thumbnail === 'string' && item.thumbnail.startsWith('http')) {
+        return item.thumbnail;
+      }
+      
+      // 2. Enclosure
+      if (item.enclosure && item.enclosure.link && item.enclosure.link.startsWith('http')) {
+        return item.enclosure.link;
+      }
+
+      // 3. Quét toàn diện HTML trong description, content hoặc encoded
+      const fullHtml = (item.description || '') + ' ' + (item.content || '') + ' ' + (item['content:encoded'] || '');
+      if (fullHtml.includes('<img')) {
+        const div = document.createElement('div');
+        div.innerHTML = fullHtml;
+        const img = div.querySelector('img');
+        if (img && img.src && img.src.startsWith('http')) {
+          return img.src;
+        }
+      }
+
+      // 4. Nguồn ảnh dự phòng phong phú
+      const defaultUSImages = [
+        'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80'
+      ];
+      return defaultUSImages[Math.floor(Math.random() * defaultUSImages.length)];
     }
 
     function cleanDescription(item) {
@@ -1683,7 +1706,7 @@
       if (e.target.id === 'article-modal') closeModal();
     }
 
-    // HÀM CHUYỂN ĐỔI TOÀN BỘ NGÔN NGỮ GIAO DIỆN (HEADER, MENU, SIDEBAR, FOOTER)
+    // HÀM CHUYỂN ĐỔI TOÀN BỘ NGÔN NGỮ GIAO DIỆN
     function changeLanguage(lang) {
       if (currentLang === lang) return;
       currentLang = lang;
@@ -1699,8 +1722,8 @@
         document.getElementById('search-input').placeholder = 'Tìm kiếm thời sự Hoa Kỳ...';
 
         // Nav tabs
-        document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> Thời Sự Hoa Kỳ';
-        document.getElementById('tab-politics').innerHTML = '<i class="fa-solid fa-landmark-dome"></i> Chánh Trị Hoa Kỳ';
+        document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> Thời Sự Mỹ';
+        document.getElementById('tab-politics').innerHTML = '<i class="fa-solid fa-landmark-dome"></i> Chính Trị Hoa Kỳ';
         document.getElementById('tab-economy').innerHTML = '<i class="fa-solid fa-chart-line"></i> Kinh Tế & Wall St';
         document.getElementById('tab-life').innerHTML = '<i class="fa-solid fa-passport"></i> Đời Sống & Di Trú';
         document.getElementById('tab-tech').innerHTML = '<i class="fa-solid fa-microchip"></i> Thung Lũng Silicon';
@@ -1743,7 +1766,7 @@
         document.getElementById('footer-news-sub').innerText = 'Nhận điểm tin thời sự Mỹ nổi bật vào mỗi 7:00 AM.';
         document.getElementById('footer-email-input').placeholder = 'Nhập email của bạn...';
         document.getElementById('footer-sub-btn').innerText = 'ĐĂNG KÝ NGAY';
-        document.getElementById('footer-copy').innerHTML = '&copy; 2026 Người Việt Today. All rights reserved. Powered by US RSS News Aggregator.';
+        document.getElementById('footer-copy').innerHTML = '&copy; 2026 Người Việt Today. All rights reserved.';
       } else {
         document.getElementById('top-breaking-tag').innerText = 'BREAKING NEWS';
         document.getElementById('top-site-desc').innerHTML = '<i class="fa-solid fa-flag-usa"></i> Vietnamese American Daily News & Media';

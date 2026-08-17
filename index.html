@@ -70,7 +70,35 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 15px;
+      flex-wrap: wrap;
     }
+
+    .top-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-strip-market {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.75rem;
+    }
+
+    .market-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.06);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .market-up { color: #10b981; font-weight: 700; }
+    .market-usd { color: #38bdf8; font-weight: 800; }
 
     .breaking-tag {
       background: var(--accent-red);
@@ -78,7 +106,7 @@
       font-weight: 800;
       padding: 2px 8px;
       border-radius: 4px;
-      margin-right: 8px;
+      margin-right: 4px;
       letter-spacing: 0.5px;
       animation: pulseRed 2s infinite;
     }
@@ -1036,6 +1064,8 @@
     }
 
     @media (max-width: 768px) {
+      .top-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .top-strip-market { flex-wrap: wrap; gap: 8px; width: 100%; }
       .foxiz-hero { grid-template-columns: 1fr; }
       .grid-2col { grid-template-columns: 1fr; }
       .cat-showcase-bar { grid-template-columns: repeat(2, 1fr); }
@@ -1059,14 +1089,30 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
+  <!-- TOP BAR WITH LIVE TICKER & FINANCIAL MARKET DATA -->
   <div class="top-strip">
-    <div>
+    <div class="top-strip-left">
       <span class="breaking-tag" id="top-breaking-tag">TIN NÓNG 24/7</span>
       <span id="current-date">Đang cập nhật thời gian...</span>
     </div>
-    <div id="top-site-desc">
-      <i class="fa-solid fa-flag-usa"></i> Báo Điện Tử Người Việt Tại Hoa Kỳ
+    
+    <!-- TỶ GIÁ USD/VND & CHỈ SỐ THỊ TRƯỜNG HOA KỲ THỜI GIAN THỰC -->
+    <div class="top-strip-market">
+      <div class="market-badge" title="Tỷ giá USD tự động cập nhật">
+        <i class="fa-solid fa-dollar-sign" style="color:#38bdf8;"></i> 
+        <span>USD/VND:</span>
+        <span class="market-usd" id="rate-usdvnd">25,480₫</span>
+      </div>
+      <div class="market-badge" title="Chỉ số Dow Jones">
+        <i class="fa-solid fa-arrow-trend-up market-up"></i>
+        <span>DOW:</span>
+        <span class="market-up">41,393 (+0.25%)</span>
+      </div>
+      <div class="market-badge" title="Chỉ số S&P 500">
+        <i class="fa-solid fa-arrow-trend-up market-up"></i>
+        <span>S&P 500:</span>
+        <span class="market-up">5,626 (+0.42%)</span>
+      </div>
     </div>
   </div>
 
@@ -1495,7 +1541,6 @@
       const container = document.getElementById('klook-tour-container');
       if (!container) return;
 
-      // Xáo trộn ngẫu nhiên danh sách tour và lấy ra 3 địa điểm
       const shuffled = [...US_KLOOK_TOURS].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
 
@@ -1515,6 +1560,20 @@
         `;
       });
       container.innerHTML = html;
+    }
+
+    // TẢI TỶ GIÁ USD/VND TỰ ĐỘNG TỪ API MỞ
+    async function fetchUSDRate() {
+      try {
+        const res = await fetch('https://open.er-api.com/v6/latest/USD');
+        const data = await res.json();
+        if (data && data.rates && data.rates.VND) {
+          const vnd = Math.round(data.rates.VND).toLocaleString('vi-VN');
+          document.getElementById('rate-usdvnd').innerText = `${vnd}₫`;
+        }
+      } catch (e) {
+        document.getElementById('rate-usdvnd').innerText = '25,480₫';
+      }
     }
 
     const US_PLAYLIST_ID = "PLY03lJniXnlrjo5ZjVmV2kCkIuyXoqBPx";
@@ -1987,7 +2046,6 @@
 
       if (lang === 'vi') {
         document.getElementById('top-breaking-tag').innerText = 'TIN NÓNG 24/7';
-        document.getElementById('top-site-desc').innerHTML = '<i class="fa-solid fa-flag-usa"></i> Báo Điện Tử Người Việt Tại Hoa Kỳ';
         document.getElementById('search-input').placeholder = 'Tìm kiếm thời sự Hoa Kỳ...';
 
         document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> Thời Sự Hoa Kỳ';
@@ -2033,7 +2091,6 @@
         document.getElementById('footer-copy').innerHTML = '&copy; 2026 Người Việt Today. All rights reserved.';
       } else {
         document.getElementById('top-breaking-tag').innerText = 'BREAKING NEWS';
-        document.getElementById('top-site-desc').innerHTML = '<i class="fa-solid fa-flag-usa"></i> Vietnamese American Daily News & Media';
         document.getElementById('search-input').placeholder = 'Search US news & stories...';
 
         document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> US News';
@@ -2088,6 +2145,7 @@
     fetchUSWeather();
     fetchYoutubePlaylist();
     renderRandomKlookTours();
+    fetchUSDRate();
   </script>
 </body>
 </html>

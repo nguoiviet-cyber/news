@@ -18,6 +18,7 @@
       --primary-blue: #1d4ed8;
       --accent-red: #e11d48;
       --accent-purple: #7c3aed;
+      --accent-orange: #ff5b00;
       --bg-body: #f8fafc;
       --bg-card: #ffffff;
       --bg-subtle: #f1f5f9;
@@ -231,6 +232,7 @@
       gap: 1.8rem;
       overflow-x: auto;
       white-space: nowrap;
+      align-items: center;
     }
 
     .nav-tab {
@@ -251,6 +253,26 @@
     .nav-tab:hover, .nav-tab.active {
       color: var(--primary-blue);
       border-bottom-color: var(--primary-blue);
+    }
+
+    .nav-deal-btn {
+      margin-left: auto;
+      background: linear-gradient(135deg, #ff5b00, #ea580c);
+      color: white !important;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 10px rgba(255, 91, 0, 0.3);
+      transition: var(--transition);
+    }
+
+    .nav-deal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(255, 91, 0, 0.5);
     }
 
     /* CATEGORY SHOWCASE BAR */
@@ -386,6 +408,34 @@
       margin: 8px 0;
       font-family: var(--font-serif);
       text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    /* KHUNG FLIGHTS SEARCH WIDGET CHUYÊN NGHIỆP */
+    .flight-search-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 2.2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .flight-search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .flight-search-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* CATEGORY SECTION HEADER */
@@ -560,6 +610,34 @@
     }
 
     .widget-head i { color: var(--accent-red); }
+
+    .sponsor-ad-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      border: 1px dashed var(--border-color);
+      text-align: center;
+    }
+
+    .sponsor-ad-btn {
+      display: inline-block;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-top: 10px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sponsor-ad-btn:hover {
+      background: var(--primary-blue);
+      color: white;
+      border-color: transparent;
+    }
 
     /* YOUTUBE PLAYLIST WIDGET */
     .yt-playlist-panel {
@@ -880,6 +958,12 @@
       gap: 12px;
     }
 
+    /* POPUP MODAL LIÊN HỆ ĐẶT QUẢNG CÁO */
+    #sponsor-modal .modal-card {
+      max-width: 500px;
+      text-align: center;
+    }
+
     /* FOOTER */
     footer {
       background: #020617;
@@ -966,6 +1050,7 @@
       }
       .nav-inner.open { display: flex; }
       .nav-tab { width: 100%; padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+      .nav-deal-btn { margin: 10px 1.5rem; justify-content: center; }
       .modal-card { padding: 1.5rem; }
       .modal-img-container img { height: 220px; }
       .modal-article-title { font-size: 1.35rem; }
@@ -1022,6 +1107,11 @@
         <span class="nav-tab" id="tab-life" onclick="filterCategory('life', this)"><i class="fa-solid fa-passport"></i> Đời Sống & Di Trú</span>
         <span class="nav-tab" id="tab-tech" onclick="filterCategory('tech', this)"><i class="fa-solid fa-microchip"></i> Thung Lũng Silicon</span>
         <span class="nav-tab" id="tab-world" onclick="filterCategory('world', this)"><i class="fa-solid fa-earth-americas"></i> Thế Giới</span>
+        
+        <!-- NÚT TIẾP THỊ LIÊN KẾT TRÊN MENU -->
+        <a href="https://www.klook.com/?aid=765325" target="_blank" rel="noopener noreferrer" class="nav-deal-btn">
+          <i class="fa-solid fa-ticket"></i> Săn Vé & Tour Klook
+        </a>
       </div>
     </nav>
   </header>
@@ -1058,6 +1148,18 @@
       <div class="foxiz-hero" id="hero-section">
         <div class="hero-list-side" id="hero-mini-container"></div>
         <div class="hero-big-card" id="hero-big-container" onclick="openModal(0)"></div>
+      </div>
+
+      <!-- KHỐI TÌM VÉ MÁY BAY HOA KỲ - VIỆT NAM (FLIGHTS SEARCH FORM) -->
+      <div class="flight-search-wrapper">
+        <div class="flight-search-header">
+          <div class="flight-search-title">
+            <i class="fa-solid fa-plane-departure" style="color: #ff5b00;"></i>
+            <span>Săn Vé Máy Bay Giá Rẻ (Hoa Kỳ ⇄ Việt Nam)</span>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">So sánh hơn 500 hãng hàng không</span>
+        </div>
+        <script async src="https://tpwgt.com/content?currency=usd&trs=562927&shmarker=765325&locale=en&default_origin=LAX&default_destination=SGN&stops=any&show_hotels=true&powered_by=true&border_radius=0&plain=false&color_button=%23ff5b00&color_button_text=%23ff5b00&promo_id=3414&campaign_id=111" charset="utf-8"></script>
       </div>
 
       <!-- SECTION TITLE -->
@@ -1103,6 +1205,76 @@
         </div>
       </div>
 
+      <!-- KHỐI WIDGET ESIM DU LỊCH AIRALO TOÀN CẦU -->
+      <div class="widget-panel" style="padding: 1.1rem; border: 1px solid rgba(255, 91, 0, 0.35);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.8rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">
+          <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px;">
+            <i class="fa-solid fa-sim-card" style="color:#ff5b00;"></i>
+            <span>eSIM Du Lịch Airalo</span>
+          </h3>
+          <span style="background:linear-gradient(135deg, #ff5b00, #ea580c); color:#fff; font-size:0.65rem; font-weight:800; padding:2px 6px; border-radius:4px;">4G/5G DATA</span>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">
+          Kết nối mạng tốc độ cao tại hơn 200 quốc gia. Giữ liên lạc khi bay về Việt Nam hoặc đi công tác quốc tế.
+        </p>
+        <div style="width:100%; overflow:hidden;">
+          <script async src="https://tpwgt.com/content?trs=562927&shmarker=765325&locale=en&country=Vietnam&powered_by=true&color_button=%23ff5b00&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541" charset="utf-8"></script>
+        </div>
+      </div>
+
+      <!-- KHỐI TOUR DU LỊCH & VÉ THAM QUAN HOA KỲ / TOÀN CẦU (NATIVE WIDGET) -->
+      <div class="widget-panel" style="padding: 1.1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:2px solid var(--border-color); padding-bottom:0.5rem;">
+          <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px;">
+            <i class="fa-solid fa-ticket" style="color:#ff5b00;"></i>
+            <span>Vé & Tour Tham Quan Klook</span>
+          </h3>
+          <span style="background:rgba(255,91,0,0.15); color:#ff5b00; font-size:0.65rem; font-weight:800; padding:2px 6px; border-radius:4px;">KLOOK</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <!-- Item 1: Disneyland / Universal California -->
+          <a href="https://www.klook.com/en-US/city/16-los-angeles-things-to-do/?aid=765325" target="_blank" rel="noopener noreferrer" style="display:flex; gap:10px; background:var(--bg-subtle); padding:8px; border-radius:8px; text-decoration:none; border:1px solid var(--border-color); transition:var(--transition);">
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=160&q=80" style="width:75px; height:65px; border-radius:6px; object-fit:cover; flex-shrink:0;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Vé Universal Studios Hollywood & Disneyland California</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:#f59e0b; font-size:0.7rem; font-weight:700;"><i class="fa-solid fa-star"></i> 4.9</span>
+                <span style="color:#ff5b00; font-weight:800; font-size:0.85rem;">Từ ~109 USD</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Item 2: New York City Pass -->
+          <a href="https://www.klook.com/en-US/city/49-new-york-things-to-do/?aid=765325" target="_blank" rel="noopener noreferrer" style="display:flex; gap:10px; background:var(--bg-subtle); padding:8px; border-radius:8px; text-decoration:none; border:1px solid var(--border-color); transition:var(--transition);">
+            <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=160&q=80" style="width:75px; height:65px; border-radius:6px; object-fit:cover; flex-shrink:0;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Vé Tòa Nhà Empire State, Tượng Nữ Thần Tự Do New York</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:#f59e0b; font-size:0.7rem; font-weight:700;"><i class="fa-solid fa-star"></i> 4.8</span>
+                <span style="color:#ff5b00; font-weight:800; font-size:0.85rem;">Từ ~44 USD</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Item 3: Las Vegas & Grand Canyon -->
+          <a href="https://www.klook.com/en-US/city/47-las-vegas-things-to-do/?aid=765325" target="_blank" rel="noopener noreferrer" style="display:flex; gap:10px; background:var(--bg-subtle); padding:8px; border-radius:8px; text-decoration:none; border:1px solid var(--border-color); transition:var(--transition);">
+            <img src="https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=160&q=80" style="width:75px; height:65px; border-radius:6px; object-fit:cover; flex-shrink:0;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Tour Tham Quan Đại Vực Grand Canyon & Trực Thăng Las Vegas</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:#f59e0b; font-size:0.7rem; font-weight:700;"><i class="fa-solid fa-star"></i> 4.9</span>
+                <span style="color:#ff5b00; font-weight:800; font-size:0.85rem;">Từ ~85 USD</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <a href="https://www.klook.com/?aid=765325" target="_blank" rel="noopener noreferrer" style="margin-top:12px; display:block; text-align:center; background:linear-gradient(135deg, #ff5b00, #ea580c); color:white; font-size:0.8rem; font-weight:800; padding:8px; border-radius:8px; text-decoration:none; box-shadow:0 3px 12px rgba(255,91,0,0.35);">
+          Xem Tất Cả Ưu Đãi Klook →
+        </a>
+      </div>
+
       <!-- WEATHER WIDGET -->
       <div class="widget-panel">
         <h3 class="widget-head">
@@ -1114,6 +1286,20 @@
         </div>
       </div>
 
+      <!-- KHÔNG GIAN TÀI TRỢ DOANH NGHIỆP HOA KỲ -->
+      <div class="sponsor-ad-box">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--accent-red); text-transform:uppercase; letter-spacing:0.5px;">
+          <i class="fa-solid fa-bullhorn"></i> Hợp Tác Quảng Bá
+        </div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin:6px 0; color:var(--text-main);">Dịch Vụ Di Trú & Kiều Bào Hoa Kỳ</h4>
+        <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">
+          Quảng bá dịch vụ luật sư di trú, bảo hiểm, bất động sản, thuế tới cộng đồng người Việt khắp 50 tiểu bang.
+        </p>
+        <button type="button" class="sponsor-ad-btn" onclick="openSponsorModal()">
+          Liên Hệ Đặt Banner
+        </button>
+      </div>
+
       <!-- INTERACTIVE COMMUNITY POLL -->
       <div class="widget-panel">
         <h3 class="widget-head">
@@ -1121,7 +1307,7 @@
           <span id="poll-heading">Thăm Dò Ý Kiến Bạn Đọc</span>
         </h3>
         <div class="poll-box">
-          <div class="poll-question" id="poll-q">Theo bạn, yếu tố nào quan trọng nhất đối với kinh tế gia đình người Việt tại Mỹ năm 2026?</div>
+          <div class="poll-question" id="poll-q">Theo bạn, yếu tố nào quan trọng nhất đối với kinh tế gia đình người Việt tại Hoa Kỳ năm 2026?</div>
           <div class="poll-option" onclick="votePoll(this)">
             <input type="radio" name="poll"> <span id="opt-1">Lãi suất vay mua nhà (Mortgage)</span>
           </div>
@@ -1187,6 +1373,30 @@
     </div>
   </div>
 
+  <!-- POPUP MODAL LIÊN HỆ ĐẶT QUẢNG CÁO -->
+  <div id="sponsor-modal" class="modal-backdrop" onclick="handleSponsorModalBgClick(event)">
+    <div class="modal-card">
+      <div class="modal-close" onclick="closeSponsorModal()"><i class="fa-solid fa-xmark"></i></div>
+      <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-red)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white; font-size: 1.4rem;">
+        <i class="fa-solid fa-bullhorn"></i>
+      </div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-main); margin-bottom: 6px;">Hợp Tác Truyền Thông & Quảng Cáo</h2>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
+        Đưa thương hiệu và dịch vụ của bạn tiếp cận trực tiếp hàng ngàn kiều bào tại Hoa Kỳ.
+      </p>
+
+      <div style="background: var(--bg-subtle); padding: 14px; border-radius: 10px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; border: 1px solid var(--border-color);">
+        <div><i class="fa-solid fa-envelope" style="color: var(--accent-red); width: 20px;"></i> <strong>Email:</strong> peaterkh@gmail.com</div>
+        <div><i class="fa-brands fa-youtube" style="color: #ef4444; width: 20px;"></i> <strong>Kênh Media:</strong> Người Việt Today</div>
+        <div><i class="fa-solid fa-location-dot" style="color: #38bdf8; width: 20px;"></i> <strong>Thị trường:</strong> California, Texas, New York & Toàn Hoa Kỳ</div>
+      </div>
+
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=peaterkh@gmail.com&su=Lien%20he%20dat%20quang%20cao%20Nguoi%20Viet%20Today" target="_blank" rel="noopener noreferrer" style="display: block; margin-top: 18px; background: linear-gradient(135deg, var(--primary-blue), #1e40af); color: white; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-decoration: none;">
+        <i class="fa-solid fa-paper-plane"></i> Gửi Thư Qua Gmail
+      </a>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
@@ -1195,7 +1405,7 @@
           <span class="logo-badge">NV</span> NGƯỜI VIỆT <span style="color: var(--accent-red)">TODAY</span>
         </div>
         <p id="footer-site-desc" style="font-size: 0.82rem; line-height: 1.6;">
-          Trang báo điện tử cập nhật tin tức thời sự Hoa Kỳ, kinh tế và đời sống cộng đồng người Việt tại Mỹ 24/7.
+          Trang báo điện tử cập nhật tin tức thời sự Hoa Kỳ, kinh tế và đời sống cộng đồng người Việt tại Hoa Kỳ 24/7.
         </p>
       </div>
 
@@ -1299,6 +1509,21 @@
       e.preventDefault();
       alert(currentLang === 'vi' ? 'Đăng ký nhận bản tin Người Việt Today thành công!' : 'Successfully subscribed to Nguoi Viet Today newsletter!');
       e.target.reset();
+    }
+
+    // MODAL LIÊN HỆ TÀI TRỢ
+    function openSponsorModal() {
+      document.getElementById('sponsor-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSponsorModal() {
+      document.getElementById('sponsor-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleSponsorModalBgClick(event) {
+      if (event.target.id === 'sponsor-modal') closeSponsorModal();
     }
 
     // TẢI VÀ HIỂN THỊ YOUTUBE PLAYLIST
@@ -1437,17 +1662,12 @@
 
     // TRÍCH XUẤT ẢNH NÂNG CAO - FIX LỖI NPR NATIONAL
     function extractImage(item) {
-      // 1. Thumbnail có sẵn
       if (item.thumbnail && typeof item.thumbnail === 'string' && item.thumbnail.startsWith('http')) {
         return item.thumbnail;
       }
-      
-      // 2. Enclosure
       if (item.enclosure && item.enclosure.link && item.enclosure.link.startsWith('http')) {
         return item.enclosure.link;
       }
-
-      // 3. Quét toàn diện HTML trong description, content hoặc encoded
       const fullHtml = (item.description || '') + ' ' + (item.content || '') + ' ' + (item['content:encoded'] || '');
       if (fullHtml.includes('<img')) {
         const div = document.createElement('div');
@@ -1457,8 +1677,6 @@
           return img.src;
         }
       }
-
-      // 4. Nguồn ảnh dự phòng phong phú
       const defaultUSImages = [
         'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=600&q=80',
         'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80',
@@ -1686,7 +1904,6 @@
       document.getElementById('modal-date').innerText = item.pubDate;
       document.getElementById('modal-img').src = item.image;
       
-      // Định dạng tách đoạn văn bản tự động
       const rawText = (currentLang === 'vi' && item.desc_vi) ? item.desc_vi : item.description;
       const paragraphs = rawText.split('\n').filter(p => p.trim().length > 0);
       document.getElementById('modal-content').innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
@@ -1721,7 +1938,6 @@
         document.getElementById('top-site-desc').innerHTML = '<i class="fa-solid fa-flag-usa"></i> Báo Điện Tử Người Việt Tại Hoa Kỳ';
         document.getElementById('search-input').placeholder = 'Tìm kiếm thời sự Hoa Kỳ...';
 
-        // Nav tabs
         document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> Thời Sự Hoa Kỳ';
         document.getElementById('tab-politics').innerHTML = '<i class="fa-solid fa-landmark-dome"></i> Chính Trị Hoa Kỳ';
         document.getElementById('tab-economy').innerHTML = '<i class="fa-solid fa-chart-line"></i> Kinh Tế & Wall St';
@@ -1729,14 +1945,12 @@
         document.getElementById('tab-tech').innerHTML = '<i class="fa-solid fa-microchip"></i> Thung Lũng Silicon';
         document.getElementById('tab-world').innerHTML = '<i class="fa-solid fa-earth-americas"></i> Thế Giới';
 
-        // Category pills
         document.getElementById('pill-c1').innerText = 'Chính Trị & Bầu Cử';
         document.getElementById('pill-c2').innerText = 'Thị Trường Chứng Khoán';
         document.getElementById('pill-c3').innerText = 'Luật Di Trú & Thẻ Xanh';
         document.getElementById('pill-c4').innerText = 'Trí Tuệ Nhân Tạo (AI)';
         document.getElementById('pill-c5').innerText = 'Quan Hệ Quốc Tế';
 
-        // Buttons & Widgets
         document.getElementById('load-more-lbl').innerText = 'XEM THÊM TIN MỚI';
         document.getElementById('yt-widget-heading').innerText = 'Truyền Hình Người Việt';
         document.getElementById('w-widget-title').innerText = 'Thời Tiết Tại Mỹ';
@@ -1749,12 +1963,10 @@
         document.getElementById('about-heading').innerText = 'Về Người Việt Today';
         document.getElementById('about-desc').innerText = 'Trang tổng hợp tin tức Hoa Kỳ độc lập, mang đến cái nhìn đa chiều về chính trị, thị trường tài chính, luật di trú và nhịp sống cộng đồng người Việt khắp 50 tiểu bang.';
 
-        // Modal Labels
         document.getElementById('modal-editor-lbl').innerText = 'Người Việt Today Biên Dịch';
         document.getElementById('modal-official-lbl').innerHTML = '<i class="fa-solid fa-shield-halved"></i> Bản quyền nội dung gốc thuộc về hãng thông tấn phát hành.';
         document.getElementById('modal-btn-lbl').innerText = 'Xem Toàn Văn Báo Gốc';
 
-        // Footer
         document.getElementById('footer-site-desc').innerText = 'Trang báo điện tử cập nhật tin tức thời sự Hoa Kỳ, kinh tế và đời sống cộng đồng người Việt tại Hoa Kỳ 24/7.';
         document.getElementById('footer-col1-heading').innerText = 'Chuyên Mục';
         document.getElementById('f-link-1').innerText = 'Chính Trị Hoa Kỳ';
@@ -1772,7 +1984,6 @@
         document.getElementById('top-site-desc').innerHTML = '<i class="fa-solid fa-flag-usa"></i> Vietnamese American Daily News & Media';
         document.getElementById('search-input').placeholder = 'Search US news & stories...';
 
-        // Nav tabs
         document.getElementById('tab-all').innerHTML = '<i class="fa-solid fa-bolt"></i> US News';
         document.getElementById('tab-politics').innerHTML = '<i class="fa-solid fa-landmark-dome"></i> Politics';
         document.getElementById('tab-economy').innerHTML = '<i class="fa-solid fa-chart-line"></i> Economy & Wall St';
@@ -1780,14 +1991,12 @@
         document.getElementById('tab-tech').innerHTML = '<i class="fa-solid fa-microchip"></i> Silicon Valley';
         document.getElementById('tab-world').innerHTML = '<i class="fa-solid fa-earth-americas"></i> World';
 
-        // Category pills
         document.getElementById('pill-c1').innerText = 'Politics & Elections';
         document.getElementById('pill-c2').innerText = 'Stock Market & Wall St';
         document.getElementById('pill-c3').innerText = 'Immigration & Green Card';
         document.getElementById('pill-c4').innerText = 'Artificial Intelligence';
         document.getElementById('pill-c5').innerText = 'Global Affairs';
 
-        // Buttons & Widgets
         document.getElementById('load-more-lbl').innerText = 'LOAD MORE STORIES';
         document.getElementById('yt-widget-heading').innerText = 'Nguoi Viet Video Media';
         document.getElementById('w-widget-title').innerText = 'US City Weather';
@@ -1800,12 +2009,10 @@
         document.getElementById('about-heading').innerText = 'About Nguoi Viet Today';
         document.getElementById('about-desc').innerText = 'Independent US news hub providing multi-dimensional insights into politics, financial markets, immigration law, and Vietnamese American lifestyle across all 50 states.';
 
-        // Modal Labels
         document.getElementById('modal-editor-lbl').innerText = 'Nguoi Viet Today Editorial';
         document.getElementById('modal-official-lbl').innerHTML = '<i class="fa-solid fa-shield-halved"></i> Original content copyright belongs to official publishers.';
         document.getElementById('modal-btn-lbl').innerText = 'Read Original Article';
 
-        // Footer
         document.getElementById('footer-site-desc').innerText = 'Digital news hub delivering 24/7 breaking US news, economic updates, and community stories.';
         document.getElementById('footer-col1-heading').innerText = 'Categories';
         document.getElementById('f-link-1').innerText = 'US Politics';
